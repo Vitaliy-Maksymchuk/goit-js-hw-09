@@ -71,24 +71,15 @@ const images = [
 
 const gallery = document.querySelector('.gallery');
 
-images.forEach(image => {
+const galleryLayout = images.map(image =>`
+  <li class="gallery-item">
+    <a href="${image.original}" class="gallery-link">
+      <img src="${image.preview}" alt="${image.description}" class="gallery-image">
+    </a>
+  </li>
+`).join('');
 
-    const list = document.createElement('li');
-    list.classList.add('gallery-item');
-
-    const link = document.createElement('a');
-    link.href = image.original;
-    link.classList.add('gallery-link');
-
-    const img = document.createElement('img');
-    img.src = image.preview;
-    img.alt = image.description;
-    img.classList.add('gallery-image');
-
-    link.appendChild(img);
-    list.appendChild(link);
-    gallery.appendChild(list);
-});
+gallery.innerHTML = galleryLayout;
 
 const lightbox = new SimpleLightbox('.gallery a', {
     captionsData: 'alt',
